@@ -8,7 +8,7 @@ function FilterLeft() {
     checkedB: true,
     checkedC: true,
     checkedD: true,
-    checkedEL: true,
+    checkedE: true,
   });
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -68,7 +68,7 @@ function FilterLeft() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state.checkedD}
+                    checked={state.checkedE}
                     onChange={handleChange}
                     name="checkedE"
                     value={""}

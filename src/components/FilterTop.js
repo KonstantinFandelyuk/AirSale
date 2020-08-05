@@ -6,7 +6,7 @@ function FilterTop() {
   const classes = FilterTopStyle();
   return (
     <div className="filterTop">
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained" className={classes.button} color="primary">
         Дороже
       </Button>
       <Button variant="contained" className={classes.button}>
