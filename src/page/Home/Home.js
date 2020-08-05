@@ -1,6 +1,7 @@
 import React from "react";
 import FilterLeft from "../../components/FilterLeft";
-import { Typography, Container } from "@material-ui/core";
+import CardBlock from "../../components/CardBlock";
+import { Typography, Container, Box } from "@material-ui/core";
 import HomeStyle from "../../style/HomeStyle";
 function Home() {
   const classes = HomeStyle();
@@ -11,16 +12,16 @@ function Home() {
           Air Sale
         </Typography>
         <main>
-          <div className="content">
-            <div className="content__list">
-              <div className="content__list-item">
-                <aside>
-                  <FilterLeft />
-                </aside>
-              </div>
-              <div className="content__list-item"></div>
+          <Box className={classes.content}>
+            <div className={classes.first_item}>
+              <aside>
+                <FilterLeft />
+              </aside>
             </div>
-          </div>
+            <div className={classes.second_item}>
+              <CardBlock />
+            </div>
+          </Box>
         </main>
       </Container>
     </>
