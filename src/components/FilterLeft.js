@@ -1,6 +1,6 @@
 import React from "react";
 import { Checkbox, FormGroup, FormControlLabel, Grid, Typography } from "@material-ui/core";
-import FilterLeftStyle from "../style/FilterLeftStyle";
+import FilterLeftStyle from "./Style/FilterLeftStyle";
 
 function FilterLeft() {
   const [state, setState] = React.useState({
@@ -30,7 +30,7 @@ function FilterLeft() {
                     value={""}
                   />
                 }
-                label="Одна пересадка"
+                label="Все"
               />
               <FormControlLabel
                 control={
@@ -41,7 +41,7 @@ function FilterLeft() {
                     value={""}
                   />
                 }
-                label="Две пересадки"
+                label="Без пересадок"
               />
               <FormControlLabel
                 control={
@@ -52,7 +52,7 @@ function FilterLeft() {
                     value={""}
                   />
                 }
-                label="Три пересадки"
+                label="1 пересадка"
               />
               <FormControlLabel
                 control={
@@ -63,7 +63,7 @@ function FilterLeft() {
                     value={""}
                   />
                 }
-                label="Четыри пересадки"
+                label="2 пересадка"
               />
               <FormControlLabel
                 control={
@@ -74,7 +74,7 @@ function FilterLeft() {
                     value={""}
                   />
                 }
-                label="Очистить все"
+                label="3 пересадка"
               />
             </FormGroup>
           </Grid>
