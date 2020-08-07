@@ -1,0 +1,19 @@
+{
+	"cart": [{
+		"id": 1,
+		"price": 13000,
+		"logo": "Logo.png",
+		"time-start": "10:45",
+		"time-end": "08:00",
+		"travel-time": "21ч 15м",
+		"transplants": 2
+	}, {
+		"id": 2,
+		"price": 15000,
+		"logo": "Logo.png",
+		"time-start": "9:45",
+		"time-end": "18:00",
+		"travel-time": "11ч 15м",
+		"transplants": 1
+	}]
+}

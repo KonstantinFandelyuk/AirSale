@@ -3,8 +3,10 @@ import FilterLeft from "../../components/FilterLeft";
 import CardBlock from "../../components/CardBlock";
 import { Typography, Container, Box } from "@material-ui/core";
 import HomeStyle from "../../style/HomeStyle";
+import data from "../../data/cart.json";
 function Home() {
   const classes = HomeStyle();
+
   return (
     <>
       <Container className={classes.root}>
@@ -19,7 +21,7 @@ function Home() {
               </aside>
             </div>
             <div className={classes.second_item}>
-              <CardBlock />
+              <CardBlock data={data.cart} />
             </div>
           </Box>
         </main>

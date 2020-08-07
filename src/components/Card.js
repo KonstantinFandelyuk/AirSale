@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import CardStyle from "./Style/CardStyle";
-function Card() {
+function Card({ props }) {
   const classes = CardStyle();
   return (
     <>
