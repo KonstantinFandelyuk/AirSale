@@ -9,87 +9,65 @@ import {
 } from "@material-ui/core";
 import FilterLeftStyle from "./Style/FilterLeftStyle";
 
-function FilterLeft() {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedC: true,
-    checkedD: true,
-    checkedE: true,
-  });
+function FilterLeft({ state, transplants, onChange, className, component = "div" }) {
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    const { name, checked } = event.target;
+    const newState = {
+      ...state,
+      [name]: {
+        ...state[name],
+        checked,
+      },
+    };
+    const [transplantAllName, ...dependentTransplantInputs] = transplants;
+
+    if (name !== transplantAllName) {
+      // const isAllTransplantsChecked = transplants.every(
+      //   (controlName) => controlName === "transplantAll" || newState[controlName].checked,
+      // );
+      const selectedTransplants = dependentTransplantInputs.filter(
+        (controlName) => newState[controlName].checked,
+      );
+      const isAllTransplantsChecked = selectedTransplants.length === transplants.length - 1;
+      console.log({
+        selectedTransplants,
+        "selectedTransplants.length": selectedTransplants.length,
+        isAllTransplantsChecked,
+      });
+
+      newState["transplantAll"].checked = isAllTransplantsChecked;
+    } else {
+      dependentTransplantInputs.forEach((controlName) => (newState[controlName].checked = checked));
+    }
+
+    onChange(newState);
   };
   const classes = FilterLeftStyle();
+
   return (
-    <>
-      <Grid className={classes.root}>
-        <FormControl>
-          <Typography className={classes.title}>Количество пересадок</Typography>
-          <Grid container>
-            <Grid item>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.checkedA}
-                      onChange={handleChange}
-                      name="checkedA"
-                      value={""}
-                    />
-                  }
-                  label="Все"
+    <Grid component={component} className={`${classes.root} ${className}`}>
+      <FormControl component="form">
+        <Typography variant="h2" className={classes.title}>
+          Количество пересадок
+        </Typography>
+        <FormGroup>
+          {transplants.map((name) => (
+            <FormControlLabel
+              key={state[name].value}
+              control={
+                <Checkbox
+                  checked={state[name].checked}
+                  onChange={handleChange}
+                  name={name}
+                  value={state[name].value}
                 />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.checkedB}
-                      onChange={handleChange}
-                      name="checkedB"
-                      value={""}
-                    />
-                  }
-                  label="Без пересадок"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.checkedC}
-                      onChange={handleChange}
-                      name="checkedC"
-                      value={""}
-                    />
-                  }
-                  label="1 пересадка"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.checkedD}
-                      onChange={handleChange}
-                      name="checkedD"
-                      value={""}
-                    />
-                  }
-                  label="2 пересадка"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={state.checkedE}
-                      onChange={handleChange}
-                      name="checkedE"
-                      value={""}
-                    />
-                  }
-                  label="3 пересадка"
-                />
-              </FormGroup>
-            </Grid>
-          </Grid>
-        </FormControl>
-      </Grid>
-    </>
+              }
+              label={state[name].label}
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    </Grid>
   );
 }
 
