@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Style from "./style.js";
 
-function FilterTop({ speedData, costData }) {
+function Switcher({ speedData, costData }) {
   const classes = Style();
   const [state, setState] = useState("cheap");
+
   const clickHandler = (value) => (event) => {
     event.preventDefault();
-    setState(value);
+    if (value === "cheap") {
+      costData();
+      setState(value);
+    } else {
+      speedData();
+      setState(value);
+    }
   };
 
   return (
@@ -32,4 +39,4 @@ function FilterTop({ speedData, costData }) {
   );
 }
 
-export default FilterTop;
+export default Switcher;

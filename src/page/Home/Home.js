@@ -51,14 +51,18 @@ function Home() {
   const [state, setState] = useState({ transplants: transplantsInitialState });
   const trnasplantChange = (transplants) => setState({ transplants });
 
-  const costData = (arr) => {
-    const newDataCost = arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+  // console.log(data.cart);
+  const costData = () => {
+    const newDataCost = data.cart.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+    console.log(newDataCost);
     setSortCost([...newDataCost, sortCost]);
+    return newDataCost;
   };
 
-  const speedData = (arr) => {
-    const newDataSpeed = arr.sort((a, b) => (a.speed > b.speed ? 1 : -1));
+  const speedData = () => {
+    const newDataSpeed = data.cart.sort((a, b) => (a.speed > b.speed ? 1 : -1));
     setSortSpeed([...newDataSpeed, sortSpeed]);
+    return newDataSpeed;
   };
 
   return (
