@@ -36,7 +36,7 @@ const transplantPositions = Object.keys(transplantsInitialState);
 
 function getTransplants(transplants) {
   return transplantPositions.reduce((result, transplantName) => {
-    if (transplantName !== 'transplantAll' && transplants[transplantName].checked) {
+    if (transplantName !== "transplantAll" && transplants[transplantName].checked) {
       result.push(transplants[transplantName].value);
     }
 
@@ -46,8 +46,20 @@ function getTransplants(transplants) {
 
 function Home() {
   const classes = HomeStyle();
+  const [sortSpeed, setSortSpeed] = useState([]);
+  const [sortCost, setSortCost] = useState([]);
   const [state, setState] = useState({ transplants: transplantsInitialState });
-  const trnasplantChange = transplants => setState({transplants});
+  const trnasplantChange = (transplants) => setState({ transplants });
+
+  const costData = (arr) => {
+    const newDataCost = arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+    setSortCost([...newDataCost, sortCost]);
+  };
+
+  const speedData = (arr) => {
+    const newDataSpeed = arr.sort((a, b) => (a.speed > b.speed ? 1 : -1));
+    setSortSpeed([...newDataSpeed, sortSpeed]);
+  };
 
   return (
     <Container className={classes.root}>
@@ -63,7 +75,13 @@ function Home() {
             className={classes.first_item}
             onChange={trnasplantChange}
           />
-          <CardBlock transplants={getTransplants(state.transplants)} className={classes.second_item} data={data.cart} />
+          <CardBlock
+            costData={costData}
+            speedData={speedData}
+            transplants={getTransplants(state.transplants)}
+            className={classes.second_item}
+            data={data.cart}
+          />
         </Box>
       </main>
     </Container>
