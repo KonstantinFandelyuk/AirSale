@@ -1,70 +1,42 @@
-import React, { useState } from "react";
-import FilterLeft from "../../components/FilterLeft";
+import React, { useState, useEffect } from "react";
+import Transplants, {
+  transplantsInitialState,
+  transplantPositions,
+  getTransplants,
+} from "../../components/Transplants";
 import CardBlock from "../../components/CardBlock";
 import { Typography, Container, Box } from "@material-ui/core";
 import HomeStyle from "../../style/HomeStyle";
-import data from "../../data/cart.json";
-
-const transplantsInitialState = {
-  transplantAll: {
-    value: "all",
-    label: "Все",
-    checked: true,
-  },
-  transplant0: {
-    value: 0,
-    label: "Без пересадок",
-    checked: true,
-  },
-  transplant1: {
-    value: 1,
-    label: "1 пересадка",
-    checked: true,
-  },
-  transplant2: {
-    value: 2,
-    label: "2 пересадки",
-    checked: true,
-  },
-  transplant3: {
-    value: 3,
-    label: "3 пересадки",
-    checked: true,
-  },
-};
-const transplantPositions = Object.keys(transplantsInitialState);
-
-function getTransplants(transplants) {
-  return transplantPositions.reduce((result, transplantName) => {
-    if (transplantName !== "transplantAll" && transplants[transplantName].checked) {
-      result.push(transplants[transplantName].value);
-    }
-
-    return result;
-  }, []);
-}
+import { getSearchId, getTickets } from "../../api/tickets";
 
 function Home() {
   const classes = HomeStyle();
-  const [sortSpeed, setSortSpeed] = useState([]);
-  const [sortCost, setSortCost] = useState([]);
-  const [state, setState] = useState({ transplants: transplantsInitialState });
-  const trnasplantChange = (transplants) => setState({ transplants });
+  const [transplants, setTransplants] = useState(transplantsInitialState);
+  const [sorting, setSorting] = useState("speed");
+  const [searchId, setSearchId] = useState(null);
+  const [tickets, setTickets] = useState([]);
+  const [stopTickets, setStop] = useState(false);
+  const trnasplantChange = (transplants) => setTransplants(transplants);
+  const sortingChange = (sorting) => setSorting(sorting);
 
-  // console.log(data.cart);
-  const costData = () => {
-    const newDataCost = data.cart.sort((a, b) => (a.cost > b.cost ? 1 : -1));
-    console.log(newDataCost);
-    setSortCost([...newDataCost, sortCost]);
-    return newDataCost;
-  };
+  useEffect(() => {
+    // console.log("effect", searchId);
+    if (!searchId) {
+      getSearchId()
+        .then(searchId => {
+          setSearchId(searchId);
 
-  const speedData = () => {
-    const newDataSpeed = data.cart.sort((a, b) => (a.speed > b.speed ? 1 : -1));
-    setSortSpeed([...newDataSpeed, sortSpeed]);
-    return newDataSpeed;
-  };
+          return getTickets(searchId);
+        })
+        .then(data => {
+          // console.log(data.tickets);
+          setTickets(data.tickets);
+          setStop(data.stop);
+        });
+    }
+  });
 
+  // console.log({ tickets, transplants, sorting });
   return (
     <Container className={classes.root}>
       <Typography variant="h1" className={classes.h1}>
@@ -72,19 +44,18 @@ function Home() {
       </Typography>
       <main>
         <Box className={classes.content}>
-          <FilterLeft
-            state={state.transplants}
+          <Transplants
+            state={transplants}
             transplants={transplantPositions}
             component="aside"
             className={classes.first_item}
             onChange={trnasplantChange}
           />
           <CardBlock
-            costData={costData}
-            speedData={speedData}
-            transplants={getTransplants(state.transplants)}
+            onSortChange={sortingChange}
+            sorting={sorting}
             className={classes.second_item}
-            data={data.cart}
+            tickets={tickets}
           />
         </Box>
       </main>

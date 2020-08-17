@@ -1,15 +1,15 @@
 import React from "react";
 import Switcher from "./Switcher";
-import CardList from "./Card";
+import CardList from "./CardList";
 import { Box } from "@material-ui/core";
 
-function CardBlock({ className, transplants, costData, speedData }) {
-  console.log({ transplants });
+function CardBlock({ className, onSortChange, sorting, tickets }) {
+  // console.log('CardBlock', { tickets });
 
   return (
     <Box className={className} display="flex" flexDirection="column">
-      <Switcher costData={costData} speedData={speedData} />
-      <CardList />
+      <Switcher sorting={sorting} onSortChange={onSortChange} />
+      <CardList tickets={tickets} />
     </Box>
   );
 }

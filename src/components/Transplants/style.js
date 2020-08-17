@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     color: "black",
     borderRadius: "10px",
+    maxHeight: "240px",
   },
   title: {
     fontSize: "1.5rem",

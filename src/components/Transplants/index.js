@@ -7,7 +7,7 @@ import {
   Typography,
   FormControl,
 } from "@material-ui/core";
-import FilterLeftStyle from "./Style/FilterLeftStyle";
+import Style from "./style.js";
 
 function FilterLeft({ state, transplants, onChange, className, component = "div" }) {
   const handleChange = (event) => {
@@ -42,7 +42,7 @@ function FilterLeft({ state, transplants, onChange, className, component = "div"
 
     onChange(newState);
   };
-  const classes = FilterLeftStyle();
+  const classes = Style();
 
   return (
     <Grid component={component} className={`${classes.root} ${className}`}>
@@ -72,3 +72,4 @@ function FilterLeft({ state, transplants, onChange, className, component = "div"
 }
 
 export default FilterLeft;
+export { transplantsInitialState, transplantPositions, getTransplants } from "./api.js";
