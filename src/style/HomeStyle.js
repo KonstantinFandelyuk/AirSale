@@ -4,7 +4,7 @@ const HomeStyle = makeStyles((theme) => ({
   root: {
     background: "rgba(0,0,0,0.9)",
     maxWidth: "1200px",
-    height: "100vh",
+    minHeight: "100vh",
     color: "white",
     paddingTop: "20px",
     textAlign: "center",

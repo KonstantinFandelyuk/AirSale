@@ -9,7 +9,23 @@
 		"transplants": 2
 	}, {
 		"id": 2,
-		"price": 15000,
+		"price": 10000,
+		"logo": "Logo.png",
+		"time-start": "9:45",
+		"time-end": "18:00",
+		"travel-time": "11ч 15м",
+		"transplants": 1
+	}, {
+		"id": 3,
+		"price": 9000,
+		"logo": "Logo.png",
+		"time-start": "9:45",
+		"time-end": "18:00",
+		"travel-time": "11ч 15м",
+		"transplants": 1
+	}, {
+		"id": 4,
+		"price": 5000,
 		"logo": "Logo.png",
 		"time-start": "9:45",
 		"time-end": "18:00",
