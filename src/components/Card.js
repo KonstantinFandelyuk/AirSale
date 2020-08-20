@@ -17,10 +17,10 @@ function Card({ ticket }) {
     if (leng <= 0 || leng >= 5) {
       return zeroStops;
     }
-    if (leng === /(^[1]{1}$|^[2-9]{1}[1-1]{1}$|^101$)/) {
+    if (leng.toString() === leng.toString().match(/(^[1]{1}$|^[2-9]{1}[1-1]{1}$|^101$)/)) {
       return oneStops;
     }
-    if (leng === /(^[2-4]{1}$|^[2-9]{1}[2-4]{1}$|^101$)/) {
+    if (leng.toString() === leng.toString().match(/(^[2-4]{1}$|^[2-9]{1}[2-4]{1}$|^101$)/)) {
       return moreStops;
     }
   };
