@@ -11,18 +11,21 @@ function Card({ ticket }) {
   };
 
   const switchLetter = (leng) => {
+    const reg = /(^[2-4]{1}$|^[2-9]{1}[2-4]{1}$|^101$)/;
     let zeroStops = "Пересадок";
     let oneStops = "Пересадка";
     let moreStops = "Пересадки";
     if (leng <= 0 || leng >= 5) {
       return zeroStops;
     }
-    if (leng.toString() === leng.toString().match(/(^[1]{1}$|^[2-9]{1}[1-1]{1}$|^101$)/)) {
-      return oneStops;
-    }
-    if (leng.toString() === leng.toString().match(/(^[2-4]{1}$|^[2-9]{1}[2-4]{1}$|^101$)/)) {
-      return moreStops;
-    }
+    // console.log(typeof leng);
+    // console.log(leng == leng.match(reg));
+    // if (leng.toString() === leng.match(/(^[1]{1}$|^[2-9]{1}[1-1]{1}$|^101$)/)) {
+    //   return oneStops;
+    // }
+    // if (leng.toString() === leng.toString().match(/(^[2-4]{1}$|^[2-9]{1}[2-4]{1}$|^101$)/)) {
+    //   return moreStops;
+    // }
   };
 
   const classes = CardStyle();
